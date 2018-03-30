@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>柱状图测试2</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 500px;"></div>
+
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // option = {
+    //     title: {
+    //         text: '某地区蒸发量和降水量',
+    //         subtext: '纯属虚构'
+    //     },
+    //     xAxis: { //x轴
+    //         type: 'category',
+    //         data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+    //     },
+    //     yAxis: { //y轴
+    //         type: 'value' //此时yAxis直接为空也是可以起作用的
+    //     },
+    //     series: [ //下列将会产生两项颜色不同的柱状图
+    //         {
+    //             name:'蒸发量',
+    //             type:'bar',
+    //             data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+    //         },
+    //         {
+    //             name:'降水量',
+    //             type:'bar',
+    //             data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+    //         }
+    //     ]
+    // };
+
+    option = {
+        title: {
+            text: '某地区蒸发量和降水量',
+            subtext: '纯属虚构'
+        },
+        dataset: { //使用dataset替代
+            source: [
+                ['month','zhengfa','jiangshui'],
+                ['1月',2.0,2.6],
+                ['2月',4.9,5.9],
+                ['3月',7.0,9.0],
+                ['4月',23.2,26.4],
+                ['5月',25.6,28.7],
+                ['6月',76.7,70.7],
+                ['7月',135.6,175.6],
+                ['8月',162.2,182.2],
+                ['9月',32.6,48.7],
+                ['10月',20.0,18.8],
+                ['11月',6.4,6.0],
+                ['12月',3.3,2.3]
+            ]
+        },
+        xAxis: { //x轴
+            type: 'category'
+        },
+        yAxis: { //y轴
+            type: 'value' //此时yAxis直接为空也是可以起作用的
+        },
+        series: [ //下列将会产生两项颜色不同的柱状图
+            {
+                name:'蒸发量',
+                type:'bar'
+            },
+            {
+                name:'降水量',
+                type:'bar'
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

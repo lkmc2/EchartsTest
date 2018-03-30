@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图显示一周天气</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        title: {
+            text: '未来一周天气变化', //标题
+            subtext: '纯属虚构' //子标题
+        },
+        tooltip: {
+            trigger: 'axis' //显示纵向提示线
+        },
+        legend: {
+            data: ['最高气温', '最低气温']
+        },
+        toolbox: { //工具箱
+            show: true, //显示工具栏
+            feature: {
+                mark: {show: true}, //显示图标
+                dataView: {show: true, readOnly: false}, //显示只带数据无图形的图标
+                magicType: {show: true, type: ['line', 'bar']}, //带折线和柱状图的图标
+                restore: {show: true}, //显示重置图标
+                saveAsImage: {show: true} //显示保存为图片图标
+            }
+        },
+        calculable: true, //启用拖拽自动计算特性
+        xAxis: {
+            type: 'category',
+            boundaryGap: false, //设置图形与左右两边靠拢
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: { //纵轴的标签名
+                formatter: '{value}℃' //标签名格式
+            }
+        },
+        series: [ //两条都是折线（曲线）
+            {
+                name: '最高气温',
+                type: 'line',
+                data: [11, 11, 15, 13, 12, 13, 10],
+                markPoint: { //设置标记点
+                    data: [ //标记点数据
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {  //标记线
+                    data: [
+                        {type: 'average', name: '平均值'} //平均值的线（横线、虚线）
+                    ]
+                }
+            },
+            {
+                name: '最低气温',
+                type: 'line',
+                data: [1, -2, 2, 5, 3, 2, 0],
+                markPoint: { //设置标记点，只会在最大值和最小值出现
+                    data: [ //标记点数据
+                        //手动指定标签上的值，横坐标和纵坐标
+                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine: {  //标记线
+                    data: [
+                        {type: 'average', name: '平均值'} //平均值的线（横线、虚线）
+                    ]
+                }
+            }
+        ]
+
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>

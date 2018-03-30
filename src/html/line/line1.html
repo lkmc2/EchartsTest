@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图1</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        xAxis: { //x轴（这里可以直接使用对象赋值，也可以在一个数组中声明多个对象）
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] //x轴数据
+        },
+        yAxis: { //y轴
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320], //y轴数据
+            //显示为折线型
+            type: 'line',
+            smooth: true //将折线变成曲线
+        }]
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>

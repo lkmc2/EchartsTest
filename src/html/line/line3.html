@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折线图3</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 800px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        tooltip: {
+            trigger: 'axis' //显示纵向提示线
+        },
+        legend: {
+            data: ['邮件营销', '联盟广告', '直接访问', '搜索引擎']
+        },
+        toolbox: { //工具箱
+            show: true, //显示工具栏
+            feature: {
+                mark: {show: true}, //显示图标
+                dataView: {show: true, readOnly: false}, //显示只带数据无图形的图标
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']}, //带折线、柱状图的图标
+                restore: {show: true}, //显示重置图标
+                saveAsImage: {show: true} //显示保存为图片图标
+            }
+        },
+        calculable: true, //启用拖拽自动计算特性
+        xAxis: {
+            type: 'category',
+            boundaryGap: false, //设置图形与左右两边靠拢
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '邮件营销',
+                type: 'line',
+                smooth: true,
+                stack: '总量',
+                symbol: 'none', //设置无标记白点
+                itemStyle: { //子项样式
+                    normal: {
+                        areaStyle: { //折线覆盖区域效果
+                            color: function () {
+                                return "rgba(137,207,240,0.3)";
+                            }() //立即执行函数
+                        }
+                    }
+                },
+                data: [
+                    120, 132, 301, 134,
+                    {value: 90, symbol: 'droplet', symbolSize: 5}, //标记点，设置该点值为90，水滴状，大小为5
+                    230, 210
+                ]
+            },
+            {
+                name: '联盟广告',
+                type: 'line',
+                smooth: true,
+                stack: '总量',
+                symbol: 'triangle', //设置点对应的图形标记为三角形
+                symbolSize: 8, //设置图形标记大小
+                data: [ //下列的每个元素都表示一个标记点
+                    120, 82,
+                    {
+                        value: 201,
+                        symbol: 'diamond', //该标记点为钻石形状
+                        symbolSize: 15,
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    textStyle: { //标志对应的字体样式
+                                        fontSize: '20',
+                                        fontFamily: '微软雅黑',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        value: 134,
+                        symbol: 'none' //该标记无样式
+                    },
+                    190,
+                    {
+                        value: 230,
+                        symbol: 'emptypin', //标记点形状为空心图钉
+                        symbolSize: 8
+                    },
+                    110
+                ]
+            },
+            {
+                name: '直接访问',
+                type: 'line',
+                stack: '总量',
+                symbol: 'arrow', //标记图标为箭头
+                symbolSize: 6,
+                symbolRotate: -45, //标记图形旋转45度
+                itemStyle: { //子项样式
+                    normal: {
+                        color: 'red', //标记和线条颜色
+                        lineStyle: { //设置线条类型
+                            width: 2, //线条宽
+                            type: 'dashed' //线条为虚线
+                        }
+                    },
+                    emphasis: { //标记被选中时的样式
+                        color: 'blue' //标记被选中时变蓝
+                    }
+                },
+                data: [
+                    320, 332, '-', 334, //特殊符号-会让线条空一段出来
+                    {
+                        value: 390,
+                        symbol: 'emptyRectangle', //空心矩形
+                        symbolSize: 20,
+                        symbolRotate: 10, //标记图形旋转10度
+                        itemStyle: { //子项样式
+                            normal: {
+                                color: 'yellowgreen' //标记颜色
+                            },
+                            emphasis: { //标记被选中时的样式
+                                color: 'orange', //标记被选中时变橙
+                                label: { //标记对应的标签样式
+                                    show: true,
+                                    position: 'inside',
+                                    textStyle: {
+                                        fontSize: '20'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    330, 320
+                ]
+            },
+            {
+                name: '搜索引擎',
+                type: 'line',
+                symbol: 'emptyCircle', //设置点对应的图形标记为空心圆
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            width: 2,
+                            color: (function () {
+                                return "rgb(137, 207, 240)";
+                            })(), //立即执行函数
+                            shadowColor: 'rgba(0,0,0,0.5)',
+                            shadowBlur: 10,
+                            shadowOffsetX: 8,
+                            shadowOffsetY: 8
+                        }
+                    },
+                    emphasis: { //强调时的样式
+                        label: {show: true}
+                    }
+                },
+                data: [ //下列的每个元素都表示一个标记点
+                    620, 732, 791,
+                    {value: 734, symbol: 'emptyHeart', symbolSize: 10},
+                    890, 930, 820
+                ]
+            }
+        ]
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>柱状图测试2</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 500px;"></div>
+
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    option = {
+        title: {
+            text: '过去七日交易额'
+        },
+        tooltip : {
+            trigger: 'axis' //显示纵向轴线
+        },
+        legend: {
+            data:['交易额','交易量']
+        },
+        xAxis : [ //x轴
+            {
+                type : 'category',
+                boundaryGap: true, //消除左右边缘间隔，防止画面移除
+                data : ['一','二','三','四','五','六','日'] //x轴数据
+            }
+        ],
+        yAxis : [ //y轴（series有两个值的时候，这里必须有两个子项）
+            {type : 'value'},
+            {type : 'value'}
+        ],
+        series : [ //第一个子项是柱状图，第二个子项是折线图
+            {
+                name: '交易额',
+                type: 'bar', //类型柱状图
+                itemStyle:{
+                    normal:{
+                        color:"#1eb2b5"
+                    }
+                },
+                data:[2000, 2300, 2400, 2500, 3100, 2100, 2800] //柱状图的值
+            },
+            {
+                name: '交易量',
+                type: 'line', //类型折线图
+                yAxisIndex: 1, //纵轴标号，将把折线图的值标签显示在右边
+                itemStyle:{
+                    normal:{
+                        color:"#9F79EE" //设置折线颜色
+                    }
+                },
+                data: [20, 30, 40, 50, 50, 40, 70] //折线的值
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encode数据到图形的映射</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        dataset: {
+            source: [
+                ['score','amount','product'], //维度名，与下列每列值分别对应（可用0,1,2表示维度名）
+                [89.2,5689,'衣服'], //'score','amount','product'
+                [44.3,8856,'裤子'],
+                [74.2,6623,'鞋子'],
+                [56.0,4869,'外套'],
+                [23.9,1984,'裙子'],
+                [89.6,1234,'袜子'],
+                [96.3,9812,'发箍'],
+                [23.6,7756,'手环']
+            ]
+        },
+        xAxis: {},
+        yAxis: {type:'category'}, //设置主方向为纵轴
+        series: [
+            {
+                type:'bar',
+                encode: {
+                    x: 'amount', // x轴对应amount维度的值（维度amount可以用1表示）
+                    y: 'product' // y轴对应product维度的值（维度product可以用2表示）
+                }
+            }
+        ]
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>

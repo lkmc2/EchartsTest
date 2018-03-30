@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Div中显示多个图形（动态）</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        tooltip: {
+            trigger: 'axis' //显示纵向提示线
+        },
+        legend: {
+            data: ['最高', '最低']
+        },
+        toolbox: {
+            show: true, //显示工具箱（界面右上角的图标）
+            feature: {
+                mark: {show: true}, //显示标记
+                dataView: {readOnly: true}, //显示数据界面（只有数据没有图形的界面）只读
+                magicType: {show:true,type:['line','bar','stack','tiled']}, //设置单独显示某种图形的数据
+                restore: {show:true}, //重置到原来的界面
+                saveAsImage: {show:true} //保存当前图形为图片
+            }
+        },
+        calculable: true, //启用拖拽重计算特性
+        dataZoom: { //数据缩放条
+            show: true,
+            realtime: true, //使用实际时间计算
+            start: 40, //缩放条起始位置
+            end: 60 //缩放条结束位置（最大值为100）
+        },
+        xAxis: {
+                type: 'category',
+                boundaryGap: true,
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 1; i <= 31; i++) {
+                        list.push('2013-03-' + i);
+                    }
+                    return list;
+                }() //立即执行函数
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [ //第一个元素为折线图，第二个元素为柱状图，第三个元素为折线图
+            { //折线图
+                name: '最高',
+                type: 'line',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 30) + 30); //四舍五入
+                    }
+                    return list;
+                }() //立即执行函数
+            },
+            { //柱状图
+                name: '最低',
+                type: 'bar',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 10));
+                    }
+                    return list;
+                }() //立即执行函数
+            },
+            { //折线图
+                name: '平均值',
+                type: 'line',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 30) + 10);
+                    }
+                    return list;
+                }() //立即执行函数
+            }
+        ]
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>

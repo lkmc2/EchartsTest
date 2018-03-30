@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Div中显示多个图形</title>
+    <script src="../../js/echarts.min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px;"></div>
+
+<script type="text/javascript">
+    //初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        xAxis: {
+                type: 'category',
+                boundaryGap: true,
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 1; i <= 31; i++) {
+                        list.push('2013-03-' + i);
+                    }
+                    return list;
+                }() //立即执行函数
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [ //第一个元素为折线图，第二个元素为柱状图，第三个元素为折线图
+            { //折线图
+                name: '最高',
+                type: 'line',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 30) + 30); //四舍五入
+                    }
+                    return list;
+                }() //立即执行函数
+            },
+            { //柱状图
+                name: '最低',
+                type: 'bar',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 10));
+                    }
+                    return list;
+                }() //立即执行函数
+            },
+            { //折线图
+                name: '平均值',
+                type: 'line',
+                data: function () { //动态生成数据
+                    var list = [];
+                    for (var i = 0; i <= 30; i++) {
+                        list.push(Math.round(Math.random() * 30) + 10);
+                    }
+                    return list;
+                }() //立即执行函数
+            }
+        ]
+    };
+
+    //使用配置显示图标
+    myChart.setOption(option);
+</script>
+</body>
+</html>
