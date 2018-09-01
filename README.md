@@ -1,2 +1,2 @@
 # EchartsTest
-百度开源网页图标框架echarts的练习Demo。
+百度开源网页图形框架echarts的练习Demo
